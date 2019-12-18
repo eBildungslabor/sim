@@ -31,7 +31,7 @@ exports.PerformActions = function(agent, actionConfigs){
 // GO_TO_STATE: Simply go to that state
 Actions.go_to_state = {
 	
-	name: "Turn into...",
+	name: "Verwandle in ...",
 
 	props: {stateID:0},
 	
@@ -41,7 +41,7 @@ Actions.go_to_state = {
 
 	ui: function(config){
 		return EditorHelper()
-				.label("Turn into ")
+				.label("Verwandle in ")
 				.stateSelector(config, "stateID")
 				.dom;
 	}
@@ -51,7 +51,7 @@ Actions.go_to_state = {
 // IF_NEIGHBOR: If more/less/equal X neighbors are a certain state, do a thing
 Actions.if_neighbor = {
 	
-	name: "If certain number of certain neighbors...",
+	name: "Wenn eine bestimmte Anzahl von angrenzenden Emojis...",
 
 	props: {
 		sign: ">=",
@@ -95,13 +95,13 @@ Actions.if_neighbor = {
 	ui: function(config){
 
 		return EditorHelper()
-				.label("If ")
+				.label("Falls ")
 				.selector([
-					{ name:"less than (<)", value:"<" },
-					{ name:"up to (≤)", value:"<=" },
-					{ name:"more than (>)", value:">" },
-					{ name:"at least (≥)", value:">=" },
-					{ name:"exactly (=)", value:"=" }
+					{ name:"weniger als (<)", value:"<" },
+					{ name:"bis zu (≤)", value:"<=" },
+					{ name:"mehr als (>)", value:">" },
+					{ name:"mindestens (≥)", value:">=" },
+					{ name:"genau (=)", value:"=" }
 				],config,"sign")
 				.label(" ")
 				.number(config, "num", {
@@ -109,7 +109,7 @@ Actions.if_neighbor = {
 					min:0, max:8,
 					step:1
 				})
-				.label(" neighbors are ")
+				.label(" benachbartes Feld folgendes Emoji hat ")
 				.stateSelector(config, "stateID")
 				.actionsUI(config.actions)
 				.dom;
@@ -121,7 +121,7 @@ Actions.if_neighbor = {
 // IF_RANDOM: With a X% chance, do a thing
 Actions.if_random = {
 	
-	name: "With a X% chance...",
+	name: "Mit einer X% Wahrscheinlichkeit ...",
 
 	props: {
 		probability: 0.01,
@@ -140,13 +140,13 @@ Actions.if_random = {
 	ui: function(config){
 
 		return EditorHelper()
-				.label("With a ")
+				.label("Mit einer ")
 				.number(config, "probability", {
 					multiplier:100,
 					min:0, max:100,
 					step:0.1
 				})
-				.label("% chance,")
+				.label("% Wahrscheinlichkeit,")
 				.actionsUI(config.actions)
 				.dom;
 
@@ -157,7 +157,7 @@ Actions.if_random = {
 // MOVE_TO: Move to a (nearby|global) (state) spot in and leave behind (state) 
 Actions.move_to = {
 	
-	name: "Move to...",
+	name: "Gehe zu...",
 
 	props: {
 		space: 0,
@@ -199,7 +199,7 @@ Actions.move_to = {
 	ui: function(config){
 
 		return EditorHelper()
-				.label("Move to ")
+				.label("Gehe zu ")
 				.selector([
 					{ name:"a neighboring", value:0 },
 					{ name:"any", value:1 }
