@@ -26,7 +26,7 @@ Editor.create = function(){
 	///// STATES DOM /////
 	//////////////////////
 
-	var title = Editor.createTitle("<span>THINGS</span> WITH RULES");
+	var title = Editor.createTitle("<span>EMOJIS</span> UND DEINE REGELN");
 	Editor.dom.appendChild(title);
 
 	Editor.statesDOM = document.createElement("div");
@@ -36,7 +36,7 @@ Editor.create = function(){
 	// Button - Add a state!
 	var addState = document.createElement("div");
 	addState.className = "editor_fancy_button";
-	addState.innerHTML = "<span>+</span>make new thing";
+	addState.innerHTML = "<span>+</span>neues Emoji-Element";
 	addState.onclick = function(){
 
 		// New state config
@@ -44,8 +44,8 @@ Editor.create = function(){
 		var newStateConfig = {
 			id: Model.generateNewID(),
 			icon: emoji.icon,
-			name: "[new thing]",
-			description: "Click icon & paste in new emoji:\nMac: press control+command+space\nOther: copy from Emojipedia.org",
+			name: "[neues Emoji-Element]",
+			description: "Klicke z.B. in der emojipedia.org auf ein Emoji-Icon. Füge es anstelle des Beispiels-Emojis ein. Benenne es. Ändere dann diesen Text in eine Beschreibung.",
 			actions: []
 		};
 
@@ -71,7 +71,7 @@ Editor.create = function(){
 	///// WORLD DOM /////
 	/////////////////////
 
-	var title = Editor.createTitle("THE <span>WORLD</span>");
+	var title = Editor.createTitle("Die <span>Spiel-Welt</span>");
 	Editor.dom.appendChild(title);
 
 	Editor.worldDOM = document.createElement("div");
@@ -94,7 +94,7 @@ Editor.create = function(){
 	var undoChanges = document.createElement("div");
 	undoChanges.className = "editor_fancy_button";
 	undoChanges.style.marginBottom = "20px";
-	undoChanges.innerHTML = "<span style='font-size:25px; line-height:40px;'>⟳</span>undo all changes";
+	undoChanges.innerHTML = "<span style='font-size:25px; line-height:40px;'>⟳</span>Alles zurücksetzen";
 	undoChanges.onclick = function(){
 		publish("/meta/reset");
 		Model.returnToBackup();
@@ -111,9 +111,9 @@ Editor.create = function(){
 		var saveChanges = document.createElement("div");
 		saveChanges.className = "editor_fancy_button";
 		saveChanges.id = "save_changes";
-		saveChanges.innerHTML = "<span style='font-size:30px; line-height:40px'>★</span>save your model";
+		saveChanges.innerHTML = "<span style='font-size:30px; line-height:40px'>★</span>Modell speichern";
 		saveChanges.onclick = function(){
-			saveLabel.innerHTML = "saving...";
+			saveLabel.innerHTML = "speichern...";
 			embedLabel.innerHTML = "...";
 			saveLink.value = "...";
 			embedLink.value = "...";
@@ -124,7 +124,7 @@ Editor.create = function(){
 		// Save your changes, label & link, label & embed
 		
 		// save label
-		var saveLabel = Editor.createLabel("when you save your model, you'll get a link here:")
+		var saveLabel = Editor.createLabel("Wenn Du Dein Modell speicherst, erhältst Du hier einen Link zum Teilen:")
 		saveLabel.style.display = "block";
 		saveLabel.style.margin = "10px 0";
 		Editor.dom.appendChild(saveLabel);
@@ -140,7 +140,7 @@ Editor.create = function(){
 		Editor.dom.appendChild(saveLink);
 
 		// embed label 
-		var embedLabel = Editor.createLabel("and an embed code here:")
+		var embedLabel = Editor.createLabel("und hier einen Einbettungscode:")
 		embedLabel.style.display = "block";
 		embedLabel.style.margin = "10px 0";
 		Editor.dom.appendChild(embedLabel);
@@ -163,10 +163,10 @@ Editor.create = function(){
 		// on save success
 		subscribe("/save/success",function(link){
 
-			saveLabel.innerHTML = "here you go! <a href='"+link+"' target='_blank'>(open in new tab)</a> (shrink link with <a href='https://tinyurl.com/' target='_blank'>TinyURL</a>)";
+			saveLabel.innerHTML = "Bitte sehr! <a href='"+link+"' target='_blank'>(in neuem Tab öffnen)</a>";
 			saveLink.value = link;
 			saveLink.select();
-			embedLabel.innerHTML = "to embed it, paste this code in your site:";
+			embedLabel.innerHTML = "Um Dein Modell auf Deiner Website zu veröffentlichen, kopiere Dir den Code:";
 
 			var width = 800;
 			var height = Math.round(width/(document.body.clientWidth/document.body.clientHeight));
@@ -174,38 +174,19 @@ Editor.create = function(){
 			
 		});
 
-		// Export your data
-		var exportModel = document.createElement("div");
-		exportModel.className = "editor_fancy_button";
-		exportModel.id = "save_changes";
-		exportModel.innerHTML = "<span style='font-size:25px; line-height:35px; font-family:monospace'>{}</span>export model";
-		exportModel.onclick = function(){
-			window.open("data:text/json;charset=utf-8,"+JSON.stringify(Model.data));
-		};
-		Editor.dom.appendChild(exportModel);
-
-		// export label 
-		var exportLabel = Editor.createLabel(
-			"This is for those of you who want to save your sim to your own computertron! "+
-			"<a href='https://github.com/ncase/sim#how-to-run-this-on-your-own-computertron' target='_blank'>[How To Do That]</a> "+
-			"Click the above button to open your sim's data in a new tab. "+
-			"Save it as <span style='font-family:monospace'>[your sim name].json</span>. "+
-			"(Remember the \".json\"! It's important!)"
-		);
-		exportLabel.style.display = "block";
-		exportLabel.style.margin = "10px 0";
-		Editor.dom.appendChild(exportLabel);
+	
 
 		// CREDITS
 		var creditsLabel = Editor.createLabel(`
-			Made by <a href='https://ncase.me/' target='_blank'>Nicky Case</a>,
-			with the 💖 of their supporters
-			<a href='https://www.patreon.com/ncase' target='_blank'>on Patreon</a>~
-			p.s: <a href='https://github.com/ncase/sim' target='_blank'>open source!</a>
+			Erstellt von <a href='https://ncase.me/' target='_blank'>Nicky Case</a>.
+			Unterstützt auf <a href='https://www.patreon.com/ncase' target='_blank'>Patreon</a>
+Übersetzt und veröffentlicht im <a href='ebildungslabor.de'>eBildungslabor</a>
+
+			Der Code ist <a href='https://github.com/ncase/sim' target='_blank'>Open Source!</a>
 		`);
 		creditsLabel.style.display = "block";
 		creditsLabel.style.margin = "30px 0";
-		creditsLabel.style.fontSize = "22px";
+		creditsLabel.style.fontSize = "14px";
 		Editor.dom.appendChild(creditsLabel);
 
 	}
@@ -448,7 +429,7 @@ Editor.createActionAdder = function(actionConfigs, dom){
 	var selectContainer = document.createElement("div");
 	selectContainer.className ="editor_new_action";
 	var button = document.createElement("div");
-	button.innerHTML = "+new";
+	button.innerHTML = "+neu";
 	selectContainer.appendChild(button);
 	selectContainer.appendChild(select);
 
